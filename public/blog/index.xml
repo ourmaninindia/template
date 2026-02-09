@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on My New Hugo Site</title>
+    <link>http://localhost:1313/blog/</link>
+    <description>Recent content in Blog on My New Hugo Site</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 25 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building Responsive Layouts with CSS Grid</title>
+      <link>http://localhost:1313/blog/post-1/</link>
+      <pubDate>Sun, 25 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/post-1/</guid>
+      <description>&lt;p&gt;Learn how to create flexible, responsive layouts using modern CSS Grid techniques. We&amp;rsquo;ll cover everything from basic grid concepts to advanced patterns.&lt;/p&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;CSS Grid has revolutionized how we build layouts on the web. Unlike older methods like floats and positioning, Grid provides a two-dimensional layout system that&amp;rsquo;s both powerful and intuitive.&lt;/p&gt;&#xA;&lt;h2 id=&#34;basic-grid-concepts&#34;&gt;Basic Grid Concepts&lt;/h2&gt;&#xA;&lt;p&gt;The fundamental concept of CSS Grid is defining a grid container and placing items within it. Here&amp;rsquo;s a simple example:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

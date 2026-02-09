@@ -1,0 +1,166 @@
+@use "sass:color";
+@use "../abstracts" as *;
+
+// ==========================================
+// BUTTON COMPONENTS
+// ==========================================
+
+.button {
+    display: inline-block;
+    padding: $spacing-sm $spacing-lg;
+    background: $color-primary;
+    color: white;
+    text-decoration: none;
+    border-radius: $border-radius-md;
+    font-weight: 600;
+    font-size: clamp(0.9375rem, 2vw, 1rem);
+    border: 2px solid $color-primary;
+    cursor: pointer;
+    transition: all $transition-base;
+    text-align: center;
+    font-family: inherit;
+    line-height: 1.5;
+
+    &:hover {
+        background: $color-primary-hover;
+        // background: color.adjust($color-primary, $lightness: -5%);
+        border-color: $color-primary-hover;
+        transform: translateY(-2px);
+        box-shadow: $shadow-sm;
+    }
+    
+    &:active {
+        transform: translateY(0);
+        background: color.adjust($color-primary, $lightness: -8%);
+    }
+    
+    // Modifiers
+    &--full-width {
+        display: block;
+        width: 100%;
+    }
+    
+    &--secondary {
+        background: $color-bg-secondary;
+        color: $color-text;
+        border-color: $color-border;
+        
+        &:hover {
+            background: color.adjust($color-primary, $lightness: -5%);
+            border-color: $color-text-light;
+        }
+    }
+    
+    &--outline {
+        background: transparent;
+        color: $color-primary;
+        border-color: $color-primary;
+        
+        &:hover {
+            background: $color-primary;
+            color: white;
+        }
+    }
+    
+    &--small {
+        padding: $spacing-xs $spacing-md;
+        font-size: 0.875rem;
+    }
+    
+    &--large {
+        padding: $spacing-md $spacing-xl;
+        font-size: 1.125rem;
+    }
+    
+    &--danger {
+        background: #ef4444;
+        border-color: #ef4444;
+        
+        &:hover {
+            background: #dc2626;
+            border-color: #dc2626;
+        }
+    }
+    
+    &--success {
+        background: #10b981;
+        border-color: #10b981;
+        
+        &:hover {
+            background: #059669;
+            border-color: #059669;
+        }
+    }
+    
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        
+        &:hover {
+            transform: none;
+            box-shadow: none;
+        }
+    }
+}
+
+// Button Group
+.button-group {
+    display: flex;
+    gap: $spacing-sm;
+    flex-wrap: wrap;
+    
+    &--center {
+        justify-content: center;
+    }
+    
+    &--end {
+        justify-content: flex-end;
+    }
+}
+
+// Icon Button
+.icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: $color-bg-secondary;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    transition: all $transition-base;
+    
+    &:hover {
+        background: $color-primary; 
+        color: white;
+        border-color: $color-primary;
+    }
+    
+    &--small {
+        width: 32px;
+        height: 32px;
+    }
+    
+    &--large {
+        width: 56px;
+        height: 56px;
+    }
+}
+
+// Link Button (looks like link, behaves like button)
+.link-button {
+    background: none;
+    border: none;
+    color: $color-primary;
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0;
+    
+    &:hover {
+        color: $color-primary-hover;
+    }
+}

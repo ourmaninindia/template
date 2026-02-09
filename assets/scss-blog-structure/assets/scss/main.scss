@@ -1,0 +1,27 @@
+// Main SCSS file
+// Import order matters - abstracts first, then base, then components, layout, and pages
+
+// 1. Abstracts - Variables, mixins, functions
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+// 2. Base - Reset, typography, global styles
+@import 'base/reset';
+@import 'base/typography';
+
+// 3. Layout - Header, footer, grid systems
+@import 'layout/navigation';
+@import 'layout/grid';
+@import 'layout/sidebar';
+@import 'layout/footer';
+
+// 4. Components - Reusable components
+@import 'components/buttons';
+@import 'components/cards';
+@import 'components/forms';
+@import 'components/widgets';
+@import 'components/pagination';
+
+// 5. Pages - Page-specific styles
+@import 'pages/blog';
+@import 'pages/single-post';

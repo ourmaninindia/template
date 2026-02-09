@@ -1,0 +1,25 @@
+{
+  "name": "blog-scss-structure",
+  "version": "1.0.0",
+  "description": "Professional SCSS architecture for blog theme",
+  "main": "scss/main.scss",
+  "scripts": {
+    "prepare": "mkdir -p static/css",
+    "scss:dev": "npm run prepare && sass assets/scss/main.scss static/css/style.css --style=expanded --source-map",
+    "scss:build": "npm run prepare && sass assets/scss/main.scss static/css/style.css --style=compressed --no-source-map",
+    "scss:watch": "npm run prepare && sass --watch assets/scss/main.scss:static/css/style.css --style=expanded --source-map",
+    "scss:watch:poll": "npm run prepare && sass --watch --poll assets/scss/main.scss:static/css/style.css"
+  },
+  "keywords": [
+    "scss",
+    "sass",
+    "blog",
+    "css",
+    "frontend"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.77.0"
+  }
+}

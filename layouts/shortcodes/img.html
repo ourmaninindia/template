@@ -1,0 +1,13 @@
+<!-- layouts/shortcodes/img.html -->
+{{ $img := .Page.Resources.GetMatch (.Get "src") }}
+{{ $alt := .Get "alt" }}
+
+{{ if $img }}
+  {{ $webp := $img.Resize "800x webp" }}
+  {{ $jpg := $img.Resize "800x jpg" }}
+  
+  <picture>
+    <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+    <img src="{{ $jpg.RelPermalink }}" alt="{{ $alt }}" loading="lazy">
+  </picture>
+{{ end }}

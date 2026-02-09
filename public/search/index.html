@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My New Hugo Site</title>
+    <meta name="description" content="">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" >
+
+
+    
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://localhost:1313/search/">
+<meta property="og:title" content="Search | My New Hugo Site">
+<meta property="og:description" content="">
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="http://localhost:1313/search/">
+<meta name="twitter:title" content="Search | My New Hugo Site">
+<meta name="twitter:description" content="">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/search/">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Search",
+  "description": "",
+  "url": "http:\/\/localhost:1313\/search\/",
+  
+  
+  "datePublished": "0001-01-01",
+  "dateModified": "0001-01-01",
+  "author": {
+    "@type": "Person",
+    "name": ""
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "My New Hugo Site",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http:\/\/localhost:1313\/"
+    }
+  }
+}
+</script>
+</head>
+<body>
+    <nav class="nav">
+    <div class="nav__container">
+        <a href="/" class="nav__logo">My New Hugo Site</a>
+        
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        
+        <ul class="nav__menu" id="navMenu">
+            
+            <li><a href="/search">🔍 Search</a></li>
+        </ul>
+        
+        <div class="nav__lang-switcher">
+            
+                
+                    <button class="nav__lang-button nav__lang-button--active"></button>
+                
+            
+        </div>
+    </div>
+</nav>
+    
+    <main>
+        
+<div class="container">
+    <div class="search-page">
+        <header class="search-page__header">
+            <h1 class="search-page__title">Search</h1>
+            <p class="search-page__description">Search through all blog posts</p>
+        </header>
+        
+        <div class="search-box">
+            <input 
+                type="text" 
+                id="search-input" 
+                class="search-box__input" 
+                placeholder="Search articles..."
+                autocomplete="off"
+                aria-label="Search">
+            <button id="search-clear" class="search-box__clear" aria-label="Clear search">×</button>
+        </div>
+        
+        <div id="search-stats" class="search-stats"></div>
+        <div id="search-results" class="search-results"></div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js" integrity="sha256-4jTJLBIXbiP4H0hN8y8hqJqAo0OdJiCYLxVy8E/5+qo=" crossorigin="anonymous"></script>
+
+<script src="/js/search.min.8a1349de2422bc0f6acd645a6007427fe4dd0ca1e44c540d823756cfebb67b20.js" integrity="sha256-ihNJ3iQivA9qzWRaYAdCf&#43;TdDKHkTFQNgjdWz&#43;u2eyA="></script>
+
+    </main>
+    
+    <footer style="background: #1f2937; color: white; padding: 2rem; text-align: center; margin-top: 4rem;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        
+        
+        <div style="margin-bottom: 2rem;">
+            <form action="/search" method="get" style="max-width: 400px; margin: 0 auto; display: flex; gap: 0.5rem;">
+                <input 
+                    type="text" 
+                    name="q" 
+                    placeholder="Quick search..." 
+                    style="flex: 1; padding: 0.5rem 1rem; border-radius: 6px; border: none;">
+                <button type="submit" style="padding: 0.5rem 1rem; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                    🔍
+                </button>
+            </form>
+        </div>
+        
+        <p>&copy; 2026 My New Hugo Site. All rights reserved.</p>
+        
+        
+        <div style="margin-top: 1.5rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; font-size: 0.875rem;">
+            <a href="/privacy" style="color: #93c5fd; text-decoration: none;">Privacy Policy</a>
+            <a href="/terms" style="color: #93c5fd; text-decoration: none;">Terms of Service</a>
+            <a href="#" onclick="window.cookieconsent.showPreferences(); return false;" 
+               style="color: #93c5fd; text-decoration: none; cursor: pointer;">
+                🍪 Cookie Settings
+            </a>
+            <a href="/search" style="color: #93c5fd; text-decoration: none;">🔍 Search</a>
+            <a href="/contact" style="color: #93c5fd; text-decoration: none;">Contact</a>
+        </div>
+    </div>
+</footer>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+  
+
+
+<script src="/js/script.js"></script>
+
+<script type="module" src="/js/cookie-consent.js"></script>
+
+<script>
+if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/sw.js')
+    .then(reg => console.log('SW registered:', reg.scope))
+    .catch(err => console.error('SW failed:', err));
+}
+</script>
+
+</body>
+</html>

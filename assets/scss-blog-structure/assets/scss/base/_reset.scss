@@ -1,0 +1,54 @@
+// base/_reset.scss
+// CSS reset and base box-sizing
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Root custom properties (for runtime changes)
+:root {
+  --max-width: #{$max-width};
+  --spacing-xs: #{$spacing-xs};
+  --spacing-sm: #{$spacing-sm};
+  --spacing-md: #{$spacing-md};
+  --spacing-lg: #{$spacing-lg};
+  --spacing-xl: #{$spacing-xl};
+  --color-primary: #{$color-primary};
+  --color-text: #{$color-text};
+  --color-text-light: #{$color-text-light};
+  --color-bg: #{$color-bg};
+  --color-bg-secondary: #{$color-bg-secondary};
+  --color-border: #{$color-border};
+}
+
+body {
+  font-family: $font-family-base;
+  color: $color-text;
+  line-height: $line-height-base;
+  background: $color-bg-secondary;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+// Remove list styles
+ul,
+ol {
+  list-style: none;
+}
+
+// Remove default link styles
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// Image defaults
+img {
+  max-width: 100%;
+  display: block;
+}

@@ -1,0 +1,38 @@
+// components/_buttons.scss
+// Button styles and variations
+
+.read-more {
+  display: inline-block;
+  color: $color-primary;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: $font-size-base;
+  justify-self: start;
+  @include transition(color);
+  
+  @include hover-state {
+    color: $color-primary-dark;
+  }
+}
+
+.search-button,
+.newsletter-button {
+  padding: $spacing-xs $spacing-md;
+  background: $color-primary;
+  color: white;
+  border: none;
+  border-radius: $border-radius-md;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: $font-size-sm;
+  @include transition(background);
+  
+  @include hover-state {
+    background: $color-primary-dark;
+  }
+}
+
+.newsletter-button {
+  padding: $spacing-sm;
+  width: 100%;
+}

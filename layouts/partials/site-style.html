@@ -1,0 +1,21 @@
+{{/* Site Styles - Using Dart Sass */}}
+
+{{/* Get main.scss */}}
+{{ $mainScss := resources.Get "scss/main.scss" }}
+
+{{/* Compile with Dart Sass */}}
+{{ $options := dict 
+    "transpiler" "dartsass"
+    "targetPath" "css/main.css"
+}}
+
+{{ $style := $mainScss | css.Sass $options }}
+
+{{/* Minify and fingerprint in production */}}
+{{ if hugo.IsProduction }}
+    {{ $style = $style | minify | fingerprint }}
+{{ end }}
+
+<link rel="stylesheet" href="{{ $style.RelPermalink }}"
+{{- with $style.Data.Integrity }} integrity="{{ . }}"{{ end }} >
+

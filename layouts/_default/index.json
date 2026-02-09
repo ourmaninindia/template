@@ -1,0 +1,14 @@
+{{- $.Scratch.Add "index" slice -}}
+{{- range where .Site.RegularPages "Type" "in" (slice "blog" "post") -}}
+  {{- $.Scratch.Add "index" (dict 
+    "title" .Title 
+    "content" (.Plain | truncate 400 "...")
+    "summary" (.Summary | plainify | truncate 200 "...")
+    "permalink" .Permalink
+    "date" (.Date.Format "2006-01-02")
+    "categories" .Params.categories
+    "tags" (first 5 .Params.tags)
+    "author" (.Params.author | default .Site.Params.author)
+  ) -}}
+{{- end -}}
+{{- $.Scratch.Get "index" | jsonify -}}

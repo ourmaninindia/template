@@ -1,0 +1,14 @@
+@use "../abstracts" as *;
+
+// ==========================================
+// NEWSPAPER LAYOUT
+// ==========================================
+
+.newspaper-layout {
+    @media (min-width: $breakpoint-lg) {
+        column-count: 2;
+        column-gap: $spacing-xl;
+
+        // ... rest of styles ...
+    }
+}

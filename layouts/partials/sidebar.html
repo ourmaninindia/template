@@ -1,0 +1,31 @@
+<aside class="blog__sidebar">
+    <div class="widget">
+        {{ partial "sidebar/search.html" . }}
+    </div>
+    <div class="widget">
+        {{ partial "sidebar/recent-posts.html" . }}
+    </div>
+    <div class="widget">
+        {{ partial "sidebar/categories.html" . }}
+    </div>
+    <div class="widget">
+        {{ partial "sidebar/tags.html" . }}
+    </div>
+    <div class="widget">
+        {{ partial "sidebar/archive.html" . }}
+    </div>
+    <div class="widget">
+        {{ partial "sidebar/newsletter.html" . }}
+    </div>
+</aside>
+
+<div class="sidebar-widget widget-newsletter">
+    <h3 class="widget__title">📬 Newsletter</h3>
+    <p>Get weekly web dev tips</p>
+    <form action="https://app.convertkit.com/forms/YOUR_FORM_ID/subscriptions" 
+          method="post" class="newsletter-form">
+        <input type="email" name="email_address" 
+               placeholder="your@email.com" required class="form-input">
+        <button type="submit" class="button button--full-width">Subscribe</button>
+    </form>
+</div>
