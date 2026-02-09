@@ -24,3 +24,6 @@ Thumbs.db
 # Hugo
 public/
 resources/
+
+# Windows Zone Identifier (downloaded file metadata)
+*.Zone.Identifier
