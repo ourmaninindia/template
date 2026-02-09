@@ -22,5 +22,5 @@ Thumbs.db
 *.scssc
 
 # Hugo
-/public/
-/resources/
+public/
+resources/
