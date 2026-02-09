@@ -20,3 +20,7 @@ Thumbs.db
 # Cache
 .sass-cache/
 *.scssc
+
+# Hugo
+/public/
+/resources/
