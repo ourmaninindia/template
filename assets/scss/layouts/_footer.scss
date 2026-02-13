@@ -4,11 +4,20 @@
 // FOOTER
 // ==========================================
 
-.footer {
-    background: $color-bg-secondary;
+footer {
+    background: $color-text; 
+    color: white; 
+    padding: 2rem; 
+    text-align: center; 
+    margin-top: 4rem;
     border-top: 1px solid $color-border;
+}
+
+.footer {
+    max-width: 1200px; 
+    margin: 0 auto;
     padding: $spacing-xl 0;
-    margin-top: $spacing-xl;
+    //margin-top: $spacing-xl;
     
     &__container {
         max-width: $max-width;
@@ -81,6 +90,43 @@
         font-size: 0.875rem;
     }
     
+    &__links {
+        margin-top: 1.5rem; 
+        display: flex; 
+        gap: 2rem; 
+        justify-content: center; 
+        flex-wrap: wrap; 
+        font-size: 0.875rem;
+
+        a {
+            color: lightblue;
+            text-decoration: none;
+            
+            &:hover { 
+                color: $color-primary;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__search {
+        margin-bottom: 2rem;
+    }
+
+    &__form {
+        max-width: 400px; 
+        margin: 0 auto; 
+        display: flex; 
+        gap: 0.5rem;
+    }
+
+    &__input {
+        flex: 1; 
+        padding: 0.5rem 1rem; 
+        border-radius: $border-radius-md; 
+        border: none;
+    }
+
     @media (max-width: $breakpoint-mobile) {
         &__container {
             grid-template-columns: 1fr;

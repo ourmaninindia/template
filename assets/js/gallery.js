@@ -13,11 +13,13 @@
     initGalleries();
   }
     
-  function initGalleries() {
+ function init() {
     initImageGallery();
     initCyclingGallery();
     initTOCToggle();
-  }
+    initTOCActiveSection();
+    initCodeTabs(); 
+}
     
   // ==========================================
   // Image Gallery (General)
@@ -73,6 +75,36 @@
     });
   }
     
+  // ==========================================
+// CODE TABS
+// ==========================================
+function initCodeTabs() {
+    const tabContainers = document.querySelectorAll('.code-tabs');
+    
+    tabContainers.forEach(function(container) {
+        const buttons = container.querySelectorAll('.code-tabs__button');
+        const panels = container.querySelectorAll('.code-tabs__panel');
+        
+        buttons.forEach(function(button, index) {
+            button.addEventListener('click', function() {
+                // Remove active from all buttons and hide all panels
+                buttons.forEach(function(btn) {
+                    btn.classList.remove('active');
+                });
+                panels.forEach(function(panel) {
+                    panel.style.display = 'none';
+                });
+                
+                // Activate clicked button and show corresponding panel
+                button.classList.add('active');
+                if (panels[index]) {
+                    panels[index].style.display = 'block';
+                }
+            });
+        });
+    });
+}
+
   // ==========================================
   // Table of Contents Toggle
   // ==========================================

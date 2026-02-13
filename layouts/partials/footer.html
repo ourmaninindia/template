@@ -1,15 +1,15 @@
-<footer style="background: #1f2937; color: white; padding: 2rem; text-align: center; margin-top: 4rem;">
-    <div style="max-width: 1200px; margin: 0 auto;">
+<footer>
+    <div class="footer">
         
         <!-- Quick Search in Footer -->
-        <div style="margin-bottom: 2rem;">
-            <form action="/search" method="get" style="max-width: 400px; margin: 0 auto; display: flex; gap: 0.5rem;">
+        <div class="footer__search">
+            <form action="/search" method="get" class="footer__form">
                 <input 
                     type="text" 
                     name="q" 
                     placeholder="Quick search..." 
-                    style="flex: 1; padding: 0.5rem 1rem; border-radius: 6px; border: none;">
-                <button type="submit" style="padding: 0.5rem 1rem; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                    class="footer__input">
+                <button type="submit">
                     🔍
                 </button>
             </form>
@@ -18,15 +18,12 @@
         <p>&copy; {{ now.Year }} {{ .Site.Title }}. All rights reserved.</p>
         
         <!-- Footer Links -->
-        <div style="margin-top: 1.5rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; font-size: 0.875rem;">
-            <a href="/privacy" style="color: #93c5fd; text-decoration: none;">Privacy Policy</a>
-            <a href="/terms" style="color: #93c5fd; text-decoration: none;">Terms of Service</a>
-            <a href="#" onclick="window.cookieconsent.showPreferences(); return false;" 
-               style="color: #93c5fd; text-decoration: none; cursor: pointer;">
-                🍪 Cookie Settings
-            </a>
-            <a href="/search" style="color: #93c5fd; text-decoration: none;">🔍 Search</a>
-            <a href="/contact" style="color: #93c5fd; text-decoration: none;">Contact</a>
+        <div class="footer__links">
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
+            <a href="#" id="cookie-settings-link">🍪 Cookie Settings</a>
+            <a href="/search">🔍 Search</a>
+            <a href="/contact">Contact</a>
         </div>
     </div>
 </footer>

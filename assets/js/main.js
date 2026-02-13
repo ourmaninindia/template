@@ -1,6 +1,6 @@
 // ==========================================
 // MAIN JAVASCRIPT
-// Core functionality
+// Core functionality - all event listeners
 // ==========================================
 
 (function() {
@@ -53,18 +53,14 @@
         window.addEventListener('scroll', function() {
             const currentScroll = window.pageYOffset;
             
-            // Don't hide at top of page
             if (currentScroll <= scrollThreshold) {
                 header.classList.remove('nav--hidden');
                 return;
             }
             
-            // Scrolling down - hide header
             if (currentScroll > lastScroll && !header.classList.contains('nav--hidden')) {
                 header.classList.add('nav--hidden');
-            } 
-            // Scrolling up - show header
-            else if (currentScroll < lastScroll && header.classList.contains('nav--hidden')) {
+            } else if (currentScroll < lastScroll && header.classList.contains('nav--hidden')) {
                 header.classList.remove('nav--hidden');
             }
             
@@ -79,7 +75,6 @@
         const links = document.querySelectorAll('a[href^="http"]');
         
         links.forEach(function(link) {
-            // Skip if same domain
             if (link.hostname === window.location.hostname) return;
             
             link.setAttribute('target', '_blank');
@@ -96,71 +91,207 @@
         links.forEach(function(link) {
             link.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
-                
-                // Skip empty anchors
                 if (href === '#') return;
                 
                 const target = document.querySelector(href);
-                
                 if (target) {
                     e.preventDefault();
                     target.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     });
-                    
-                    // Update URL without jumping
                     history.pushState(null, null, href);
                 }
             });
         });
     }
     
-   // ==========================================
-// Copy Code Button
-// ==========================================
-function initCopyCode() {
-    const codeBlocks = document.querySelectorAll('pre code');
+    // ==========================================
+    // Copy Code Button
+    // ==========================================
+    function initCopyCode() {
+        const codeBlocks = document.querySelectorAll('pre code');
+        
+        codeBlocks.forEach(function(codeBlock) {
+            const pre = codeBlock.parentElement;
+            const button = document.createElement('button');
+            button.className = 'code-copy-btn';
+            button.textContent = 'Copy';
+            button.setAttribute('aria-label', 'Copy code to clipboard');
+            
+            button.addEventListener('click', function() {
+                navigator.clipboard.writeText(codeBlock.textContent).then(function() {
+                    button.textContent = 'Copied!';
+                    button.classList.add('code-copy-btn--success');
+                    
+                    setTimeout(function() {
+                        button.textContent = 'Copy';
+                        button.classList.remove('code-copy-btn--success');
+                    }, 2000);
+                }).catch(function(err) {
+                    console.error('Failed to copy:', err);
+                    button.textContent = 'Error';
+                });
+            });
+            
+            pre.style.position = 'relative';
+            pre.appendChild(button);
+        });
+    }
     
-    codeBlocks.forEach(function(codeBlock) {
-        const pre = codeBlock.parentElement;
+    // ==========================================
+    // Image Lightbox
+    // ==========================================
+    function initLightbox() {
+        const triggers = document.querySelectorAll('.lightbox-trigger');
+        if (triggers.length === 0) return;
         
-        // Get language from class (e.g., language-javascript)
-        const languageClass = codeBlock.className.match(/language-(\w+)/);
-        const language = languageClass ? languageClass[1] : 'code';
+        // Create lightbox element
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox';
+        lightbox.innerHTML = `
+            <button class="lightbox__close" aria-label="Close lightbox">×</button>
+            <div class="lightbox__content">
+                <img class="lightbox__image" src="" alt="">
+            </div>
+        `;
+        document.body.appendChild(lightbox);
         
-        // Create language label
-        const languageLabel = document.createElement('span');
-        languageLabel.className = 'code-language-label';
-        languageLabel.textContent = language;
+        const lightboxImg = lightbox.querySelector('.lightbox__image');
+        const closeBtn = lightbox.querySelector('.lightbox__close');
         
-        // Create copy button
-        const button = document.createElement('button');
-        button.className = 'code-copy-btn';
-        button.textContent = 'Copy';
-        button.setAttribute('aria-label', 'Copy code to clipboard');
-        
-        button.addEventListener('click', function() {
-            navigator.clipboard.writeText(codeBlock.textContent).then(function() {
-                button.textContent = 'Copied!';
-                button.classList.add('code-copy-btn--success');
-                
-                setTimeout(function() {
-                    button.textContent = 'Copy';
-                    button.classList.remove('code-copy-btn--success');
-                }, 2000);
-            }).catch(function(err) {
-                console.error('Failed to copy:', err);
-                button.textContent = 'Error';
+        // Open lightbox
+        triggers.forEach(function(trigger) {
+            trigger.style.cursor = 'pointer';
+            trigger.addEventListener('click', function() {
+                lightboxImg.src = this.src;
+                lightboxImg.alt = this.alt;
+                lightbox.classList.add('lightbox--open');
+                document.body.style.overflow = 'hidden';
             });
         });
         
-        pre.style.position = 'relative';
-        pre.appendChild(languageLabel);
-        pre.appendChild(button);
-    });
-}
+        // Close lightbox - button
+        closeBtn.addEventListener('click', function() {
+            lightbox.classList.remove('lightbox--open');
+            document.body.style.overflow = '';
+        });
+        
+        // Close lightbox - backdrop click
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox || e.target.classList.contains('lightbox__content')) {
+                lightbox.classList.remove('lightbox--open');
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Close lightbox - ESC key (handled in initEscapeKey)
+    }
     
+    // ==========================================
+    // Modals
+    // ==========================================
+    function initModals() {
+        const modals = document.querySelectorAll('.modal');
+        
+        modals.forEach(function(modal) {
+            const closeBtn = modal.querySelector('.modal__close');
+            const openBtns = document.querySelectorAll(`[data-modal="${modal.id}"]`);
+            
+            // Open modal
+            openBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    modal.classList.add('modal--open');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close modal - button
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    modal.classList.remove('modal--open');
+                    document.body.style.overflow = '';
+                });
+            }
+            
+            // Close modal - backdrop click
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('modal--open');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    }
+    
+    // ==========================================
+    // Accordions
+    // ==========================================
+    function initAccordions() {
+        const toggles = document.querySelectorAll('.accordion__toggle');
+        
+        toggles.forEach(function(toggle) {
+            toggle.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                
+                this.setAttribute('aria-expanded', !isExpanded);
+                
+                if (content && content.classList.contains('accordion__content')) {
+                    content.style.display = isExpanded ? 'none' : 'block';
+                }
+            });
+        });
+    }
+    
+    // ==========================================
+    // Global ESC Key Handler
+    // ==========================================
+    function initEscapeKey() {
+        document.addEventListener('keydown', function(e) {
+            if (e.key !== 'Escape') return;
+            
+            // Close mobile menu
+            const menu = document.querySelector('.nav__menu--open');
+            if (menu) {
+                menu.classList.remove('nav__menu--open');
+                const toggle = document.querySelector('.nav__toggle');
+                if (toggle) toggle.setAttribute('aria-expanded', 'false');
+            }
+            
+            // Close modals
+            const openModal = document.querySelector('.modal--open');
+            if (openModal) {
+                openModal.classList.remove('modal--open');
+                document.body.style.overflow = '';
+            }
+            
+            // Close lightbox
+            const openLightbox = document.querySelector('.lightbox--open');
+            if (openLightbox) {
+                openLightbox.classList.remove('lightbox--open');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+    
+    function initCookie() {
+      document.addEventListener("DOMContentLoaded", function () {
+        const cookieLink = document.getElementById("cookie-settings-link");
+
+        if (cookieLink) {
+          cookieLink.addEventListener("click", function (e) {
+                e.preventDefault();
+
+            if (window.cookieconsent && window.cookieconsent.showPreferences) {
+              window.cookieconsent.showPreferences();
+            }
+          });
+        }
+      });
+    };
+
+
     // ==========================================
     // Initialize All
     // ==========================================
@@ -170,6 +301,11 @@ function initCopyCode() {
         initExternalLinks();
         initSmoothScroll();
         initCopyCode();
+        initLightbox();   
+        initModals();
+        initAccordions();
+        initEscapeKey();
+        initCookie()
     }
     
     // Run on DOM ready
