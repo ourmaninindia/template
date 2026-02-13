@@ -14,6 +14,12 @@
 
 <script src="{{ $coreJS.RelPermalink }}"{{ with $coreJS.Data.Integrity }} integrity="{{ . }}"{{ end }}></script>
 
+{{/* Newsletter JavaScript - Load on all pages */}}
+{{ $newsletterJS := resources.Get "js/newsletter.js" }}
+{{ if hugo.IsProduction }}
+  {{ $newsletterJS = $newsletterJS | minify | fingerprint }}
+{{ end }}
+<script src="{{ $newsletterJS.RelPermalink }}"{{ with $newsletterJS.Data.Integrity }} integrity="{{ . }}"{{ end }}></script>
 
 {{/* ========================================== */}}
 {{/* JAVASCRIPT - PAGE-SPECIFIC */}}

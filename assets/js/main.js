@@ -191,89 +191,132 @@
     // ==========================================
     // Modals
     // ==========================================
-    function initModals() {
-        const modals = document.querySelectorAll('.modal');
+
+function initModals() {
+    const modals = document.querySelectorAll('.modal');
+    
+    modals.forEach(function(modal) {
+        const closeBtn = modal.querySelector('.modal__close');
+        const openBtns = document.querySelectorAll(`[data-modal="${modal.id}"]`);
+        const closeBtns = modal.querySelectorAll('[data-action="close-modal"]');
         
-        modals.forEach(function(modal) {
-            const closeBtn = modal.querySelector('.modal__close');
-            const openBtns = document.querySelectorAll(`[data-modal="${modal.id}"]`);
-            
-            // Open modal
-            openBtns.forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    modal.classList.add('modal--open');
-                    document.body.style.overflow = 'hidden';
-                });
-            });
-            
-            // Close modal - button
-            if (closeBtn) {
-                closeBtn.addEventListener('click', function() {
-                    modal.classList.remove('modal--open');
-                    document.body.style.overflow = '';
-                });
-            }
-            
-            // Close modal - backdrop click
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    modal.classList.remove('modal--open');
-                    document.body.style.overflow = '';
-                }
+        // Open modal
+        openBtns.forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                modal.classList.add('modal--open');
+                document.body.classList.add('modal-open');
+                document.body.style.overflow = 'hidden';
             });
         });
+        
+        // Close modal - X button
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                closeModal(modal);
+            });
+        }
+        
+        // Close modal - Cancel buttons
+        closeBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                closeModal(modal);
+            });
+        });
+        
+        // Close modal - backdrop click
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal(modal);
+            }
+        });
+    });
+    
+    // Helper function to close modal
+    function closeModal(modal) {
+        modal.classList.remove('modal--open');
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
     }
+}
     
     // ==========================================
     // Accordions
     // ==========================================
-    function initAccordions() {
-        const toggles = document.querySelectorAll('.accordion__toggle');
-        
-        toggles.forEach(function(toggle) {
-            toggle.addEventListener('click', function() {
-                const content = this.nextElementSibling;
-                const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                
-                this.setAttribute('aria-expanded', !isExpanded);
-                
-                if (content && content.classList.contains('accordion__content')) {
-                    content.style.display = isExpanded ? 'none' : 'block';
+
+function initAccordions() {
+    const toggles = document.querySelectorAll('.accordion__toggle');
+    
+    toggles.forEach(function(toggle) {
+        toggle.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            const icon = this.querySelector('.accordion__icon');
+            
+            // Toggle aria-expanded
+            this.setAttribute('aria-expanded', !isExpanded);
+            
+            // Toggle content
+            if (content && content.classList.contains('accordion__content')) {
+                if (isExpanded) {
+                    // Closing
+                    content.style.display = 'none';
+                    if (icon) icon.textContent = '+';
+                } else {
+                    // Opening
+                    content.style.display = 'block';
+                    if (icon) icon.textContent = '−';
+                    
+                    // Smooth scroll into view if needed
+                    setTimeout(function() {
+                        const rect = toggle.getBoundingClientRect();
+                        const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+                        
+                        if (!isVisible) {
+                            toggle.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'nearest' 
+                            });
+                        }
+                    }, 100);
                 }
-            });
+            }
         });
-    }
+    });
+}
     
     // ==========================================
     // Global ESC Key Handler
     // ==========================================
-    function initEscapeKey() {
-        document.addEventListener('keydown', function(e) {
-            if (e.key !== 'Escape') return;
-            
-            // Close mobile menu
-            const menu = document.querySelector('.nav__menu--open');
-            if (menu) {
-                menu.classList.remove('nav__menu--open');
-                const toggle = document.querySelector('.nav__toggle');
-                if (toggle) toggle.setAttribute('aria-expanded', 'false');
-            }
-            
-            // Close modals
-            const openModal = document.querySelector('.modal--open');
-            if (openModal) {
-                openModal.classList.remove('modal--open');
-                document.body.style.overflow = '';
-            }
-            
-            // Close lightbox
-            const openLightbox = document.querySelector('.lightbox--open');
-            if (openLightbox) {
-                openLightbox.classList.remove('lightbox--open');
-                document.body.style.overflow = '';
-            }
-        });
-    }
+
+function initEscapeKey() {
+    document.addEventListener('keydown', function(e) {
+        if (e.key !== 'Escape') return;
+        
+        // Close mobile menu
+        const menu = document.querySelector('.nav__menu--open');
+        if (menu) {
+            menu.classList.remove('nav__menu--open');
+            const toggle = document.querySelector('.nav__toggle');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        }
+        
+        // Close modals
+        const openModal = document.querySelector('.modal--open');
+        if (openModal) {
+            openModal.classList.remove('modal--open');
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+        }
+        
+        // Close lightbox
+        const openLightbox = document.querySelector('.lightbox--open');
+        if (openLightbox) {
+            openLightbox.classList.remove('lightbox--open');
+            document.body.style.overflow = '';
+        }
+    });
+}
     
     function initCookie() {
       document.addEventListener("DOMContentLoaded", function () {
@@ -314,5 +357,26 @@
     } else {
         init();
     }
+
+    // ==========================================
+// Modal Helper Functions (Global)
+// ==========================================
+window.openModal = function(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.add('modal--open');
+        document.body.classList.add('modal-open');
+        document.body.style.overflow = 'hidden';
+    }
+};
+
+window.closeModal = function(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('modal--open');
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
+    }
+};
     
 })();

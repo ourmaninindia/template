@@ -20,6 +20,12 @@ hugo server -D
 
 ## 📚 Documentation Guide
 
+# Hugo Blog - Documentation
+
+...
+
+## 📚 Documentation Guide
+
 ### Getting Started
 1. **[Installation Guide](01-installation.md)** - Set up Hugo and dependencies on Ubuntu
 2. **[Project Structure](02-project-structure.md)** - Understand the file organization
@@ -36,6 +42,9 @@ hugo server -D
 9. **[Performance](09-performance.md)** - Optimize for speed
 10. **[Troubleshooting](10-troubleshooting.md)** - Fix common issues
 11. **[Advanced Features](11-advanced.md)** - Deep dives into features
+12. **[Forms & Submissions](12-forms-and-submissions.md)** - ← NEW: Form handling guide
+
+...
 
 ## ✨ Features
 

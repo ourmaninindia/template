@@ -19,6 +19,7 @@
   let searchData = [];
     
   // Load search index
+  // Fuse.js v7 expects weights between 0–1 for better proportional ranking.
   fetch('/index.json')
     .then(response => response.json())
     .then(data => {
@@ -26,18 +27,21 @@
             
       // Initialize Fuse.js
       fuse = new Fuse(searchData, {
-        keys: [
-          { name: 'title', weight: 3 },
-          { name: 'tags', weight: 2 },
-          { name: 'categories', weight: 2 },
-          { name: 'summary', weight: 1.5 },
-          { name: 'content', weight: 1 }
-        ],
-        threshold: 0.4,
-        includeScore: true,
-        includeMatches: true,
-        minMatchCharLength: 2
-      });
+  keys: [
+    { name: 'title', weight: 0.5 },
+    { name: 'tags', weight: 0.2 },
+    { name: 'categories', weight: 0.1 },
+    { name: 'summary', weight: 0.15 },
+    { name: 'content', weight: 0.05 }
+  ],
+  threshold: 0.35,
+  includeScore: true,
+  includeMatches: true,
+  minMatchCharLength: 2,
+  ignoreLocation: true,
+  shouldSort: true
+});
+
             
       // Check URL for search query
       const urlParams = new URLSearchParams(window.location.search);

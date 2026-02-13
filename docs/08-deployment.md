@@ -68,7 +68,9 @@ Publish directory: public
 
 Site settings → Environment variables → Add:
 ````
-HUGO_VERSION = 0.122.0
+HUGO_VERSION = 0.154.5
+CONVERTKIT_API_KEY = your_api_key_here
+CONVERTKIT_FORM_ID = your_form_id_here
 ````
 
 4. **Deploy:**
