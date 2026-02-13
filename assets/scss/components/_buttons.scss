@@ -5,7 +5,7 @@
 // BUTTON COMPONENTS
 // ==========================================
 
-.button {
+button {
     display: inline-block;
     padding: $spacing-sm $spacing-lg;
     background: $color-primary;
@@ -14,24 +14,35 @@
     border-radius: $border-radius-md;
     font-weight: 600;
     font-size: clamp(0.9375rem, 2vw, 1rem);
-    border: 2px solid $color-primary;
+    border: none;
     cursor: pointer;
-    transition: all $transition-base;
+    transition: all 0.2s ease;
     text-align: center;
     font-family: inherit;
     line-height: 1.5;
-
+    position: relative;
+    
+    // 3D effect - shadow layers
+    box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.12),
+        0 1px 2px rgba(0, 0, 0, 0.24);
+    
     &:hover {
         background: $color-primary-hover;
-        // background: color.adjust($color-primary, $lightness: -5%);
-        border-color: $color-primary-hover;
-        transform: translateY(-2px);
-        box-shadow: $shadow-sm;
+        transform: translateY(-3px);
+        
+        // Enhanced 3D shadow on hover
+        box-shadow: 
+            0 7px 14px rgba(0, 0, 0, 0.15),
+            0 3px 6px rgba(0, 0, 0, 0.10),
+            0 0 0 1px rgba(255, 255, 255, 0.1) inset;
     }
     
     &:active {
-        transform: translateY(0);
-        background: color.adjust($color-primary, $lightness: -8%);
+        transform: translateY(-1px);
+        box-shadow: 
+            0 3px 7px rgba(0, 0, 0, 0.15),
+            0 1px 3px rgba(0, 0, 0, 0.10);
     }
     
     // Modifiers

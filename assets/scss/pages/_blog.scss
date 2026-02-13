@@ -11,4 +11,20 @@
   // Additional blog listing specific styles if needed
 }
 
+
 // You can add blog-specific layout adjustments here
+
+.blog__sidebar {
+    background-color: lightgray;
+    border-left: 2px solid #ddd;
+    padding: 0.5rem;
+    box-shadow: -2px 0 4px rgba(0,0,0,0.05);
+}
+
+@media (max-width: $breakpoint-tablet) {
+    .blog__sidebar {
+        border-left: none;
+        padding-left: 0;
+        padding-top: 1rem;
+    }
+}

@@ -4,50 +4,68 @@
 <div class="container">
     <div class="blog__grid">
         <div class="blog__posts">
-            {{ range .Paginator.Pages }}
-                <article class="blog__post">
-                    {{ with .Params.image }}
-                        <div class="blog__post-image">
-                            <img src="{{ . | relURL }}" alt="{{ $.Title }}">
-                        </div>
-                    {{ else }}
-                        <div class="blog__post-image">{{ .Params.icon | default "📝" }}</div>
-                    {{ end }}
-                    
-                    <div class="blog__post-content">
-                        <div class="blog__post-meta">
-                            <span>📅 {{ .Date.Format "Jan 02, 2006" }}</span>
-                            {{ with .Params.author }}
-                                <span>👤 {{ . }}</span>
-                            {{ end }}
-                        </div>
-                        
-                        <h2 class="blog__post-title">
-                            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-                        </h2>
-                        
-                        <p class="blog__post-excerpt">{{ .Summary }}</p>
-                        
-                        <a href="{{ .RelPermalink }}" class="blog__read-more">
-                            {{ i18n "readMore" }}
-                        </a>
-                    </div>
-                </article>
-            {{ end }}
             
-            {{ if gt .Paginator.TotalPages 1 }}
-            <div class="blog__pagination">
-                {{ if .Paginator.HasPrev }}
-                    <a href="{{ .Paginator.Prev.URL }}">← {{ i18n "previous" }}</a>
+            {{/* Get all pages in the blog section inside the scope */}}
+            {{ $blogPages := where .Site.RegularPages "Section" "blog" }}
+
+            {{ if gt (len $blogPages) 0 }}
+                {{ $paginator := .Paginate $blogPages }}
+
+                {{ range $paginator.Pages }}
+                    <article class="blog__post">
+                        {{ with .Params.image }}
+                            <div class="blog__post-image">
+                                <img src="{{ . | relURL }}" alt="{{ $.Title }}">
+                            </div>
+                        {{ else }}
+                            <div class="blog__post-image">{{ .Params.icon | default "📝" }}</div>
+                        {{ end }}
+                        
+                        <div class="blog__post-content">
+                            <div class="blog__post-meta">
+                                <span>📅 {{ .Date.Format "Jan 02, 2006" }}</span>
+                                {{ with .Params.author }}
+                                    <span>👤 {{ . }}</span>
+                                {{ end }}
+                            </div>
+                            
+                            <h2 class="blog__post-title">
+                                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                            </h2>
+                            
+                            <p class="blog__post-excerpt">
+                                {{ with .Summary }}
+                                    {{ . | plainify | truncate 300 }}
+                                {{ else }}
+                                    {{ .Content | plainify | truncate 300 }}
+                                {{ end }}
+                            </p>
+                            
+                            <a href="{{ .RelPermalink }}" class="blog__read-more">
+                                {{ i18n "readMore" }}
+                            </a>
+                        </div>
+                    </article>
                 {{ end }}
                 
-                <span>{{ i18n "page" }} {{ .Paginator.PageNumber }} {{ i18n "of" }} {{ .Paginator.TotalPages }}</span>
-                
-                {{ if .Paginator.HasNext }}
-                    <a href="{{ .Paginator.Next.URL }}">{{ i18n "next" }} →</a>
+                {{ if gt $paginator.TotalPages 1 }}
+                    <div class="blog__pagination">
+                        {{ if $paginator.HasPrev }}
+                            <a href="{{ $paginator.Prev.URL }}">← {{ i18n "previous" }}</a>
+                        {{ end }}
+                        
+                        <span>{{ i18n "page" }} {{ $paginator.PageNumber }} {{ i18n "of" }} {{ $paginator.TotalPages }}</span>
+                        
+                        {{ if $paginator.HasNext }}
+                            <a href="{{ $paginator.Next.URL }}">{{ i18n "next" }} →</a>
+                        {{ end }}
+                    </div>
                 {{ end }}
-            </div>
+
+            {{ else }}
+                <p>No blog posts found.</p>
             {{ end }}
+
         </div>
 
         {{ partial "sidebar.html" . }}

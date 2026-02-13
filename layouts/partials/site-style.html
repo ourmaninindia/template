@@ -2,6 +2,9 @@
 
 {{/* Get main.scss */}}
 {{ $mainScss := resources.Get "scss/main.scss" }}
+{{ if not $mainScss }}
+  {{ errorf "main.scss not found in assets/scss/" }}
+{{ end }}
 
 {{/* Compile with Dart Sass */}}
 {{ $options := dict 

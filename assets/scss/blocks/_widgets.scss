@@ -6,7 +6,7 @@
 
 .widget {
     background: $color-bg;
-    border-radius: $radius-md;
+    border-radius: $border-radius-md;
     padding: $spacing-md;
     box-shadow: $shadow-sm;
     
@@ -85,7 +85,7 @@
         color: $color-text-light;
     }
     
-    &__category-list {
+    & .category-list {
         list-style: none;
     }
     
@@ -110,7 +110,7 @@
     &__category-count {
         background: $color-bg-secondary;
         padding: 2px 8px;
-        border-radius: $radius-full;
+        border-radius: $border-radius-full;
         font-size: clamp(0.6875rem, 1.5vw, 0.75rem);
         color: $color-text-light;
         font-weight: 600;
@@ -122,7 +122,7 @@
         gap: $spacing-xs;
     }
     
-    &__archive-list {
+    & .archive-list {
         list-style: none;
     }
     
@@ -157,29 +157,12 @@
     grid-area: input;
     padding: $spacing-xs $spacing-sm;
     border: 1px solid $color-border;
-    border-radius: $radius-sm;
+    border-radius: $border-radius-sm;
     font-size: clamp(0.8125rem, 2vw, 0.875rem);
     font-family: inherit;
     
     &:focus {
         outline: none;
         border-color: $color-primary;
-    }
-}
-
-.newsletter-button {
-    grid-area: button;
-    padding: $spacing-sm;
-    background: $color-primary;
-    color: white;
-    border: none;
-    border-radius: $radius-md;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: clamp(0.8125rem, 2vw, 0.875rem);
-    transition: background $transition-base;
-    
-    &:hover {
-        background: $color-primary-hover;
     }
 }

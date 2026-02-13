@@ -41,7 +41,7 @@
     &__search {
         background: $color-bg;
         padding: $spacing-lg;
-        border-radius: $radius-lg;
+        border-radius: $border-radius-lg;
         border: 2px solid $color-border;
         margin-bottom: $spacing-xl;
         
@@ -75,13 +75,13 @@
         text-align: left;
         background: $color-bg-secondary;
         padding: $spacing-lg;
-        border-radius: $radius-lg;
+        border-radius: $border-radius-lg;
     }
     
     &__smart {
         background: $color-bg;
         padding: $spacing-lg;
-        border-radius: $radius-lg;
+        border-radius: $border-radius-lg;
         border: 2px solid $color-primary;
         margin-bottom: $spacing-xl;
         
@@ -104,7 +104,7 @@
     flex: 1;
     padding: $spacing-sm $spacing-md;
     border: 2px solid $color-border;
-    border-radius: $radius-md;
+    border-radius: $border-radius-md;
     font-size: clamp(0.9375rem, 2vw, 1rem);
     font-family: inherit;
     
@@ -120,7 +120,7 @@
     padding: $spacing-md;
     margin-bottom: $spacing-sm;
     background: $color-bg-secondary;
-    border-radius: $radius-md;
+    border-radius: $border-radius-md;
     text-decoration: none;
     color: inherit;
     transition: all $transition-base;
@@ -147,7 +147,7 @@
 .mini-post {
     background: $color-bg;
     padding: $spacing-md;
-    border-radius: $radius-md;
+    border-radius: $border-radius-md;
     border: 1px solid $color-border;
     margin-bottom: $spacing-sm;
     
@@ -178,7 +178,7 @@
 }
 
 // Responsive
-@media (max-width: $breakpoint-sm) {
+@media (max-width: $breakpoint-mobile) {
     .error-search-form {
         flex-direction: column;
     }

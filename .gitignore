@@ -7,9 +7,10 @@ yarn.lock
 static/css/style.css
 static/css/style.css.map
 
-# OS files
+# Windows 
 .DS_Store
 Thumbs.db
+*.Zone.Identifier
 
 # IDE
 .vscode/
@@ -25,5 +26,4 @@ Thumbs.db
 public/
 resources/
 
-# Windows Zone Identifier (downloaded file metadata)
-*.Zone.Identifier
+

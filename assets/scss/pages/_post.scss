@@ -6,7 +6,7 @@
 
 .post {
     background: $color-bg;
-    border-radius: $radius-md;
+    border-radius: $border-radius-md;
     padding: $spacing-lg;
     box-shadow: $shadow-sm;
     
@@ -26,7 +26,7 @@
         width: 100%;
         height: clamp(250px, 40vw, 400px);
         object-fit: cover;
-        border-radius: $radius-md;
+        border-radius: $border-radius-md;
         margin-bottom: $spacing-md;
     }
     
@@ -64,7 +64,7 @@
         padding: 4px 12px;
         background: $color-primary;
         color: white;
-        border-radius: $radius-full;
+        border-radius: $border-radius-full;
         text-decoration: none;
         font-size: clamp(0.8125rem, 2vw, 0.875rem);
         transition: background $transition-base;
@@ -120,7 +120,7 @@
             background: #272822;
             color: #f8f8f2;
             padding: $spacing-md;
-            border-radius: $radius-md;
+            border-radius: $border-radius-md;
             overflow-x: auto;
             margin-bottom: $spacing-md;
             
@@ -149,7 +149,7 @@
         }
         
         img {
-            border-radius: $radius-md;
+            border-radius: $border-radius-md;
             margin: $spacing-md 0;
         }
     }
@@ -207,7 +207,7 @@
     margin-top: $spacing-xl;
     padding: $spacing-lg;
     background: $color-bg-secondary;
-    border-radius: $radius-md;
+    border-radius: $border-radius-md;
     
     h4 {
         margin-bottom: $spacing-md;
@@ -229,7 +229,7 @@
     padding: $spacing-sm;
     background: $color-bg;
     border: 1px solid $color-border;
-    border-radius: $radius-md;
+    border-radius: $border-radius-md;
     text-decoration: none;
     color: $color-text;
     font-weight: 600;
@@ -254,7 +254,7 @@
         padding: 4px 12px;
         background: $color-primary;
         color: white;
-        border-radius: $radius-full;
+        border-radius: $border-radius-full;
         font-size: 0.75rem;
         font-weight: 600;
         letter-spacing: 0.5px;
@@ -328,7 +328,7 @@
         margin-bottom: $spacing-md;
         padding: $spacing-md;
         background: white;
-        border-radius: $radius-md;
+        border-radius: $border-radius-md;
         box-shadow: $shadow-sm;
     }
     
@@ -409,7 +409,7 @@
     gap: $spacing-md;
     padding: $spacing-md;
     background: white;
-    border-radius: $radius-md;
+    border-radius: $border-radius-md;
     text-decoration: none;
     color: inherit;
     transition: all $transition-base;
@@ -453,7 +453,7 @@
         padding: 2px 8px;
         background: rgba($color-primary, 0.1);
         color: $color-primary;
-        border-radius: $radius-full;
+        border-radius: $border-radius-full;
         font-size: 0.75rem;
         font-weight: 600;
     }
@@ -471,7 +471,7 @@
 }
 
 // Responsive
-@media (max-width: $breakpoint-md) {
+@media (max-width: $breakpoint-tablet) {
     .author-bio {
         &__card {
             grid-template-columns: 1fr;
@@ -497,7 +497,7 @@
     }
 }
 
-@media (max-width: $breakpoint-sm) {
+@media (max-width: $breakpoint-mobile) {
     .author-bio {
         padding: $spacing-md;
         
@@ -537,7 +537,7 @@
     background: rgba(white, 0.1);
     color: white;
     border: 1px solid rgba(white, 0.2);
-    border-radius: $radius-sm;
+    border-radius: $border-radius-sm;
     font-size: 0.75rem;
     font-weight: 600;
     cursor: pointer;

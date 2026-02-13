@@ -49,6 +49,10 @@ Change all `@use 'file';` to `@import 'file';` in Sass files.
 # - Unclosed bracket
 # - Undefined variable
 
+# Test which file or variable is missing
+cd assets/scss
+sass main.scss
+
 # Test Sass compilation
 hugo server -D --verbose
 ````
@@ -276,6 +280,11 @@ https://yourdomain.com/index.json
 Browser console should show no errors loading:
 ````
 https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js
+````
+
+# If you have openssl check for the integrity code to be mentioned after 'sha256-'
+````bash
+curl -s https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js | openssl dgst -sha256 -binary | openssl base64 -A
 ````
 
 **Check search.js:**

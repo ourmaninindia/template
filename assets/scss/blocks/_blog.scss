@@ -22,7 +22,7 @@
     
     &__post {
         background: $color-bg;
-        border-radius: $radius-md;
+        border-radius: $border-radius-md;
         overflow: hidden;
         box-shadow: $shadow-sm;
         transition: transform $transition-base, box-shadow $transition-base;
@@ -149,7 +149,7 @@
         align-items: center;
         padding: $spacing-md;
         background: $color-bg;
-        border-radius: $radius-md;
+        border-radius: $border-radius-md;
         gap: $spacing-sm;
         margin-top: $spacing-lg;
         
@@ -195,7 +195,7 @@
     }
 }
 
-@media (max-width: $breakpoint-sm) {
+@media (max-width: $breakpoint-mobile) { 
     .blog {
         &__sidebar {
             grid-template-columns: 1fr;

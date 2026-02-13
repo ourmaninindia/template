@@ -1,4 +1,5 @@
 @use "../abstracts" as *;
+@use "../components/cards"; 
 
 // ==========================================
 // IMAGE GALLERIES
@@ -11,7 +12,7 @@
         margin-bottom: $spacing-lg;
         
         &:not(.post-image--wide) {
-            @media (min-width: $breakpoint-md) {
+            @media (min-width: $breakpoint-tablet) {
                 width: calc(50% - #{$spacing-md});
                 
                 &.post-image--left {
@@ -37,13 +38,13 @@
         img {
             width: 100%;
             height: auto;
-            border-radius: $radius-md;
+            border-radius: $border-radius-md;
             box-shadow: $shadow-md;
             transition: transform $transition-base, box-shadow $transition-base;
             
             &:hover {
                 transform: translateY(-4px);
-                box-shadow: $shadow-lg;
+                box-shadow: $shadow-md; // was lg;
             }
         }
     }
@@ -70,12 +71,12 @@
     gap: $spacing-md;
     background: linear-gradient(135deg, rgba($color-primary, 0.1) 0%, rgba($color-primary, 0.05) 100%);
     padding: $spacing-lg;
-    border-radius: $radius-lg;
+    border-radius: $border-radius-lg;
     margin: $spacing-xl 0;
     border: 2px solid $color-border;
     box-shadow: $shadow-sm;
     
-    @media (max-width: $breakpoint-sm) {
+    @media (max-width: $breakpoint-mobile) {
         grid-template-columns: repeat(2, 1fr);
         gap: $spacing-sm;
         padding: $spacing-md;
@@ -113,7 +114,7 @@
 }
 
 // Responsive
-@media (max-width: $breakpoint-sm) {
+@media (max-width: $breakpoint-mobile) {
     .image-gallery,
     .cycling-gallery {
         .post-image {

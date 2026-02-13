@@ -2,139 +2,180 @@
 @use "../abstracts" as *;
 
 // ==========================================
-// HEADER & NAVIGATION BLOCK
+// HEADER / NAVIGATION
 // ==========================================
 
 .nav {
-    background: $color-bg;
-    border-bottom: 1px solid $color-border;
     position: sticky;
     top: 0;
+    background-image: linear-gradient(110deg,#20123a 20%,#20123a 46%,#e65321 60%);
+    background-color: #20123a;
+    border-bottom: 1px solid $color-border;
     z-index: $z-sticky;
-    box-shadow: $shadow-sm;
-    transition: transform $transition-slow ease-in-out;
+    transition: transform $transition-base;
     
     &--hidden {
         transform: translateY(-100%);
-    }
-    
-    &--scrolled {
-        box-shadow: $shadow-md;
     }
     
     &__container {
         max-width: $max-width;
         margin: 0 auto;
         padding: 0 $spacing-md;
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        grid-template-areas: "logo menu lang";
+        display: flex;
+        justify-content: space-between;
         align-items: center;
-        gap: $spacing-lg;
         min-height: 64px;
     }
     
     &__logo {
-        grid-area: logo;
-        font-size: clamp(1.25rem, 3vw, 1.5rem);
-        font-weight: bold;
-        color: $color-primary;
-        text-decoration: none;
-        transition: opacity $transition-base;
-        
-        &:hover {
-            opacity: 0.8;
-        }
-    }
-    
-    &__menu {
-        grid-area: menu;
-        list-style: none;
-        display: flex;
-        gap: clamp(1rem, 3vw, 2rem);
-        justify-self: center;
-        flex-wrap: wrap;
+        font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+        font-weight: 700;
+        z-index: 2;
         
         a {
+            color: $color-bg;
             text-decoration: none;
-            color: $color-text;
-            font-weight: 500;
             transition: color $transition-base;
-            font-size: clamp(0.875rem, 2vw, 1rem);
-            position: relative;
             
             &:hover {
                 color: $color-primary;
             }
+        }
+    }
+    
+    &__menu {
+        @media (max-width: $breakpoint-tablet) {
+            position: fixed;
+            top: 64px;
+            left: 0;
+            right: 0;
+            background: $color-text;
+            border-bottom: 1px solid $color-border;
+            padding: $spacing-md;
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all $transition-base;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             
-            // Optional: Underline effect on hover
+            &--open {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+    
+    &__list {
+        display: flex;
+        gap: $spacing-md;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        
+        @media (max-width: $breakpoint-tablet) {
+            flex-direction: column;
+            gap: $spacing-sm;
+        }
+    }
+    
+    &__item {
+        &--lang {
+            margin-left: $spacing-sm;
+            padding-left: $spacing-sm;
+            border-left: 1px solid $color-border;
+            
+            @media (max-width: $breakpoint-tablet) {
+                margin-left: 0;
+                padding-left: 0;
+                border-left: none;
+                border-top: 1px solid $color-border;
+                padding-top: $spacing-sm;
+                margin-top: $spacing-sm;
+            }
+        }
+    }
+    
+    &__link {
+        color: $color-bg;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: clamp(0.9375rem, 2vw, 1rem);
+        transition: color $transition-base;
+        display: block;
+        padding: $spacing-xs 0;
+        
+        &:hover {
+            color: $color-primary;
+        }
+        
+        &--active {
+            color: $color-primary;
+            position: relative;
+            
             &::after {
                 content: '';
                 position: absolute;
-                bottom: -4px;
+                bottom: 0;
                 left: 0;
                 right: 0;
                 height: 2px;
                 background: $color-primary;
-                transform: scaleX(0);
-                transition: transform $transition-base;
+                
+                @media (max-width: $breakpoint-tablet) {
+                    display: none;
+                }
             }
-            
-            &:hover::after {
-                transform: scaleX(1);
-            }
-        }
-    }
-    
-    &__lang-switcher {
-        grid-area: lang;
-        display: flex;
-        gap: $spacing-xs;
-        border: 1px solid $color-border;
-        border-radius: $border-radius-sm;
-        overflow: hidden;
-    }
-    
-    &__lang-button {
-        padding: $spacing-xs $spacing-sm;
-        border: none;
-        background: transparent;
-        cursor: pointer;
-        font-weight: 500;
-        transition: all $transition-base;
-        font-size: clamp(0.75rem, 2vw, 0.875rem);
-        font-family: inherit;
-        
-        &--active {
-            background: $color-primary;
-            color: white;
-        }
-        
-        &:hover:not(&--active) {
-            background: $color-bg-secondary;
         }
     }
     
     &__toggle {
         display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 5px;
         background: none;
         border: none;
-        font-size: 1.5rem;
         cursor: pointer;
         padding: $spacing-xs;
-        color: $color-text;
-    }
-}
-
-// Mobile menu (if needed)
-@media (max-width: $breakpoint-tablet) {
-    .nav {
-        &__toggle {
-            display: block;
+        width: 32px;
+        height: 32px;
+        z-index: 2;
+        
+        @media (max-width: $breakpoint-tablet) {
+            display: flex;
         }
         
-        &__menu {
-            // Add mobile menu styles if using hamburger
+        &:hover .nav__toggle-bar {
+            background: $color-primary;
+        }
+    }
+    
+    &__toggle-bar {
+        width: 100%;
+        height: 3px;
+        background: $color-text;
+        border-radius: 2px;
+        transition: all $transition-base;
+        transform-origin: center;
+    }
+    
+    // Hamburger animation when open
+    &__toggle[aria-expanded="true"] {
+        .nav__toggle-bar {
+            &:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            &:nth-child(2) {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            
+            &:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
         }
     }
 }
